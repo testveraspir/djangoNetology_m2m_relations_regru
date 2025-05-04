@@ -1,0 +1,5 @@
+django~=5.1.7
+psycopg2-binary
+pillow
+
+python-dotenv~=1.0.1
