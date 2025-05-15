@@ -3,4 +3,4 @@ psycopg2-binary
 pillow
 python-dotenv
 flake8
-gunicorn
+gunicorn==20.1.0
