@@ -64,4 +64,4 @@ jobs:
             script: |
               cd /home/vera/djangoNetology_m2m_relations_regru
               git pull
-              sudo systemctl restart gunicorn
+              echo "${{secrets.PASSWORD_SERVER}}" | sudo -S systemctl restart gunicorn
