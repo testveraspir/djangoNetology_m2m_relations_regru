@@ -62,6 +62,6 @@ jobs:
             username: ${{secrets.USERNAME}}
             password: ${{secrets.PASSWORD_SERVER}}
             script: |
-              cd какой путь указать /home/vera
+              cd /home/vera
               git pull
               sudo systemctl restart gunicorn
