@@ -1,5 +1,6 @@
-django~=5.1.7
+django
 psycopg2-binary
 pillow
-
-python-dotenv~=1.0.1
+gunicron
+python-dotenv
+flake8
