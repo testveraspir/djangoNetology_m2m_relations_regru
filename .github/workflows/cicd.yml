@@ -7,6 +7,26 @@ on:
 jobs:
     testing:
       runs-on: ubuntu-latest
+      env:
+          NAME: ${{secrets.NAME}}
+          DJANGO_DB_USER: ${{secrets.DJANGO_DB_USER}}
+          PASSWORD: ${{secrets.PASSWORD}}
+          HOST: ${{secrets.HOST}}
+          PORT: ${{secrets.PORT}}
+      services:
+          postgres_nmain:
+              image: postgres:latest
+              env:
+                  POSTGRES_USERS: ${{ env.DJANGO_DB_USER}}
+                  POSTGRES_PASSWORD: ${{ env.PASSWORD}}
+                  POSTGRES_DB: ${{ env.NAME}}
+              ports:
+                  - 5432:5432
+              options:
+                  --health-cmd pg_isready
+                  --health-interval 5s
+                  --health-timeout 5s
+                  --health-retries 5
       steps:
         - name: Checkout code
           uses: actions/checkout@v3
@@ -22,3 +42,11 @@ jobs:
         - name: Lint with flake8
           run: flake8 . --exclude migrations --ignore E501,F401,E302,W293,W391,W292
 
+        - name: Tests
+          run: python manage.py test
+          env:
+            NAME: ${{env.NAME}}
+            DJANGO_DB_USER: ${{env.DJANGO_DB_USER}}
+            PASSWORD: ${{env.PASSWORD}}
+            HOST: ${{env.HOST}}
+            PORT: ${{env.PORT}}
