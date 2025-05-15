@@ -1,6 +1,6 @@
 django
 psycopg2-binary
 pillow
-gunicorn
 python-dotenv
 flake8
+gunicorn
