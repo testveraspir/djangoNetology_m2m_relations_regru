@@ -50,3 +50,18 @@ jobs:
             PASSWORD: ${{env.PASSWORD}}
             HOST: ${{env.HOST}}
             PORT: ${{env.PORT}}
+
+    deploy:
+      runs-on: ubuntu-latest
+      needs: testing
+      steps:
+        - name: Deploy
+          uses: appleboy/ssh-action@master
+          with:
+            host: 89.111.169.174
+            username: ${{secrets.USERNAME}}
+            password: ${{secrets.PASSWORD_SERVER}}
+            script: |
+              cd какой путь указать /home/vera
+              git pull
+              sudo systemctl restart gunicorn
